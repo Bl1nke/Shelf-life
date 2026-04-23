@@ -1,0 +1,81 @@
+# Bytecode и файлы компиляции
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Дистрибутивы / упаковка
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Виртуальные окружения
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Логи и базы данных
+*.log
+*.sql
+*.sqlite
+*.db
+
+# Файлы тестов и покрытия
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.hypothesis/
+.venv/
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+dmypy.json
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Файлы IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Переменные окружения
+.env
+.env.*
+!.env.example
+
+# Профилирование
+*.prof
+*.lprof
+
+# Документация
+docs/_build/
+site/
