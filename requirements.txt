@@ -12,3 +12,5 @@ pytesseract == 0.3.13
 RapidFuzz == 3.14.5
 Werkzeug == 3.1.8
 thefuzz[speedup]==0.22.1
+gunicorn==22.0.0
+Flask-Limiter==3.7.0
