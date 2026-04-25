@@ -118,4 +118,15 @@
   {"name": "Жвачка", "shelf_life_days": 365},
   {"name": "Салфетки бумажные", "shelf_life_days": 1825},
   {"name": "Туалетная бумага", "shelf_life_days": 1825}
+  {"name": "Увлажняющий крем для лица", "shelf_life_days": 730},
+  {"name": "Сыворотка с витамином C", "shelf_life_days": 365},
+  {"name": "Тональный крем", "shelf_life_days": 548},
+  {"name": "Гигиеническая помада", "shelf_life_days": 730},
+  {"name": "Тушь для ресниц", "shelf_life_days": 180},
+  {"name": "Мицеллярная вода", "shelf_life_days": 730},
+  {"name": "Скраб для лица", "shelf_life_days": 548},
+  {"name": "Шампунь", "shelf_life_days": 730},
+  {"name": "Кондиционер для волос", "shelf_life_days": 730},
+  {"name": "Пенка для умывания", "shelf_life_days": 365},
+  {"name": "Тоник для лица", "shelf_life_days": 365}
 ]
