@@ -1,197 +1,229 @@
-/* Дарья, это твои файлы, здесь пока находиться сайт заглушка, простая версия, для того, чтобы обработать backend, ты можешь создать другой дизайн, где будет больше функций */
-* {
+/* Переменные для легкой настройки цветов */
+:root {
+    --bg-main: #f0fdfa;        /* Пастельный мятный фон */
+    --accent-color: #99f6e4;   /* Светлая бирюза */
+    --text-dark: #134e4a;      /* Глубокий темно-зеленый */
+    --text-muted: #94a3b8;     /* Серый для дат */
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --phone-border: #1e293b;
+}
+
+• {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f5f5f7;
-    color: #1c1c1e;
-    padding-bottom: 100px;
+    background-color: #e2e8f0; /* Серый фон вокруг "телефона" */
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
 }
 
-.container {
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 16px;
-}
-
-h1 {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.list {
+/* Эффект мобильного устройства */
+.app-container {
+    width: 100%;
+    max-width: 390px; /* Ширина iPhone */
+    height: 844px;    /* Высота iPhone */
+    background-color: var(--bg-main);
+    border: 8px solid var(--phone-border);
+    border-radius: 40px;
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
-.item {
-    background: #ffffff;
-    padding: 16px;
-    border-radius: 14px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+/* Навигация */
+.navbar {
+    padding: 30px 24px 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    animation: slideIn 0.25s ease-out;
 }
 
-@keyframes slideIn {
-    from { opacity: 0; transform: translateY(-8px); }
-    to   { opacity: 1; transform: translateY(0); }
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-dark);
 }
 
-.name {
-    font-size: 17px;
-    font-weight: 600;
-    margin-bottom: 4px;
+.logo span {
+    color: #2dd4bf;
 }
 
-.date {
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.days {
-    font-size: 13px;
-    font-weight: 600;
-    padding: 4px 8px;
-    border-radius: 8px;
-    background-color: #f2f2f7;
-    margin-right: 8px;
-}
-
-.del {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
+.icon-btn {
+    background: white;
     border: none;
-    background-color: #ff3b30;
-    color: #ffffff;
-    font-size: 18px;
-    line-height: 1;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s;
-}
-
-.del:active { background-color: #d70015; }
-
-.ok { color: #34c759; }
-.warn { color: #ff9500; }
-.danger { color: #ff3b30; }
-.expired { color: #8e8e93; text-decoration: line-through; }
-
-.slots {
-    display: flex;
-    gap: 12px;
-}
-
-.slot {
-    flex: 1;
-    height: 70px;
-    border: 2px dashed #d1d1d6;
+    padding: 10px;
     border-radius: 14px;
-    background-color: #ffffff;
+    color: var(--text-dark);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    position: relative;
+    cursor: pointer;
 }
 
+.dot {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 8px;
+    height: 8px;
+    background: #fb7185;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+/* Заголовок */
+.header {
+    padding: 20px 24px;
+}
+
+.header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text-dark);
+    line-height: 1.1;
+}
+
+.header span {
+    color: var(--text-muted);
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* Список карточек */
+.product-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 24px;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.product-name {
+    font-weight: 700;
+    font-size: 16px;
+    color: #334155;
+}
+
+.expiry-date {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.card-status {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.badge {
+    padding: 4px 12px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.badge-green { background: #dcfce7; color: #059669; }
+.badge-blue { background: #e0f2fe; color: #0284c7; }
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.delete-btn:hover { color: #f43f5e; }
+
+/* Заглушки */
+.placeholders {
+    display: grid;
+    grid-cols: 2;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 20px 24px;
+    opacity: 0.2;
+}
+
+.placeholder-box {
+    height: 80px;
+    border: 2px dashed var(--text-dark);
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-dark);
+}
+
+/* Кнопка FAB */
 .fab {
-    position: fixed;
-    bottom: 24px;
+    position: absolute;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     width: 64px;
     height: 64px;
+    background: var(--accent-color);
+    border: none;
     border-radius: 50%;
-    background-color: #007aff;
-    color: #ffffff;
-    font-size: 32px;
-    border: none;
-    box-shadow: 0 4px 14px rgba(0, 122, 255, 0.4);
-    cursor: pointer;
+    color: var(--text-dark);
     display: flex;
-    align-items: center;
     justify-content: center;
-    transition: transform 0.15s ease;
-    z-index: 50;
-}
-
-.fab:active { transform: translateX(-50%) scale(0.92); }
-
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.6);
     align-items: center;
-    justify-content: center;
-    z-index: 100;
-    padding: 16px;
-}
-
-.modal-box {
-    background: #ffffff;
-    width: 100%;
-    max-width: 400px;
-    padding: 24px;
-    border-radius: 18px;
-    text-align: center;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-}
-
-.modal-box h2 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 16px;
-}
-
-.cam-placeholder {
-    width: 100%;
-    height: 220px;
-    background-color: #1c1c1e;
-    border-radius: 12px;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #8e8e93;
-    font-size: 16px;
-}
-
-.btn {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
+    box-shadow: 0 10px 20px rgba(20, 184, 166, 0.2);
     cursor: pointer;
-    margin-bottom: 10px;
-    transition: opacity 0.2s;
+    transition: transform 0.2s;
 }
 
-.btn:active { opacity: 0.8; }
-
-.btn-scan {
-    background-color: #007aff;
-    color: #ffffff;
+/* Дополнительные стили для мобильной верстки */
+.mobile-container {
+    width: 100%;
+    max-width: 410px;
+    height: 100vh;
+    max-height: 840px;
+    background: #f0fdfa;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 8px solid #1e293b;
+    border-radius: 45px;
 }
 
-.btn-close {
-    background-color: #f2f2f7;
-    color: #1c1c1e;
+.product-list {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: none;
 }
 
-/* Скрытие скроллбара для чистого мобильного вида */
-body::-webkit-scrollbar { width: 0; }
-body { -ms-overflow-style: none; scrollbar-width: none; }
+.glass-card {
+    background: white;
+    border-radius: 28px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+.fab:active { transform: translateX(-50%) scale(0.9); }

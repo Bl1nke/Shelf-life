@@ -1,39 +1,117 @@
-<!-- Дарья, это твои файлы, здесь пока находиться сайт заглушка, простая версия, для того, чтобы обработать backend, ты можешь создать другой дизайн, где будет больше функций -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Сроки годности</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <title>Shelf Life Mobile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Сроки годности</h1>
-        
-        <!-- Сюда скрипт будет добавлять карточки товаров -->
-        <div id="list" class="list"></div>
-        
-        <!-- Пустые слоты для визуального баланса -->
-        <div class="slots">
-            <div class="slot"></div>
-            <div class="slot"></div>
+
+    <div class="mobile-container">
+        <!-- Навигация -->
+        <nav class="flex justify-between items-center px-6 py-6">
+            <span class="text-2xl font-black text-teal-900 tracking-tight">Shelf<span class="text-teal-400">Life</span></span>
+            <div class="bg-white p-2 rounded-xl shadow-sm text-teal-500"><i data-lucide="bell" class="w-6 h-6"></i></div>
+        </nav>
+
+        <header class="px-6 py-2">
+            <h1 class="text-3xl font-extrabold text-teal-950 leading-tight">Моя <br><span class="text-teal-400/60 italic font-light">косметика</span></h1>
+        </header>
+
+        <!-- Список продуктов -->
+        <div id="product-list" class="product-list space-y-4"></div>
+
+        <!-- Нижняя панель управления -->
+        <div class="flex justify-center items-center gap-6 pb-10 mt-auto">
+            <!-- Кнопка Сканировать (для 3-го участника) -->
+            <button onclick="startScan()" class="w-14 h-14 bg-white text-teal-600 rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-transform">
+                <i data-lucide="camera" class="w-6 h-6"></i>
+            </button>
+
+            <!-- Кнопка Добавить вручную -->
+            <button onclick="openModal()" class="w-20 h-20 bg-teal-200 text-teal-800 rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-transform">
+                <i data-lucide="plus" class="w-10 h-10"></i>
+            </button>
+            
+            <div class="w-14"></div> <!-- Для симметрии -->
         </div>
     </div>
 
-    <!-- Плавающая кнопка добавления -->
-    <button class="fab" onclick="openModal()">+</button>
+    <!-- МОДАЛЬНОЕ ОКНО (для связи с Бэкендом) -->
+    <div id="modal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-6">
+        <div class="bg-white w-full max-w-xs rounded-[35px] p-8 shadow-2xl">
+            <h2 class="text-xl font-bold text-teal-900 mb-6">Новое средство</h2>
+            
+            <div class="space-y-4">
+                <input type="text" id="p-name" placeholder="Название (напр. Крем)" class="w-full p-4 bg-teal-50 rounded-2xl border-none outline-teal-200">
+                <input type="text" id="p-brand" placeholder="Бренд" class="w-full p-4 bg-teal-50 rounded-2xl border-none outline-teal-200">
+                <input type="date" id="p-date" class="w-full p-4 bg-teal-50 rounded-2xl border-none outline-teal-200 text-teal-800">
+            </div>
 
-    <!-- Модальное окно сканирования -->
-    <div id="modal" class="modal">
-        <div class="modal-box">
-            <h2>Сканирование чека</h2>
-            <div class="cam-placeholder">📷 Область камеры</div>
-            <button class="btn btn-scan" onclick="mockScan()">📸 Сканировать (тест)</button>
-            <button class="btn btn-close" onclick="closeModal()">Закрыть</button>
+            <div class="flex gap-3 mt-8">
+                <button onclick="closeModal()" class="flex-1 py-4 text-slate-400 font-bold">Отмена</button>
+                <button onclick="addProduct()" class="flex-1 py-4 bg-teal-200 text-teal-800 rounded-2xl font-bold shadow-lg shadow-teal-100">Ок</button>
+            </div>
         </div>
     </div>
 
-    <script src="/static/ui.js"></script>
+    <script>
+        // Имитация базы данных (потом это будет приходить от бэкенда)
+        let products = [
+            { id: 1, name: 'Сыворотка Витамин C', brand: 'La Roche', date: '2026-04-24', days: 2, bg: 'bg-rose-50', text: 'text-rose-500' }
+        ];
+
+        function renderProducts() {
+            const list = document.getElementById('product-list');
+            list.innerHTML = '';
+            products.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'glass-card p-5 mx-6 mb-4 flex justify-between items-center';
+                card.innerHTML = '<div class="flex flex-col"><span class="font-bold text-slate-700 text-lg">' + p.name + '</span><span class="text-slate-400 text-xs">' + p.brand + '</span></div><div class="flex flex-col items-end gap-3"><span class="px-3 py-1 rounded-xl text-[10px] font-black ' + p.bg + ' ' + p.text + '">' + p.days + ' ДН.</span><button onclick="deleteProduct(' + p.id + ')" class="text-slate-200 hover:text-rose-400"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>';
+                list.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        // Функции модального окна
+        function openModal() { document.getElementById('modal').classList.remove('hidden'); }
+        function closeModal() { document.getElementById('modal').classList.add('hidden'); }
+
+        function addProduct() {
+            const name = document.getElementById('p-name').value;
+            const brand = document.getElementById('p-brand').value;
+            const date = document.getElementById('p-date').value;
+
+            if(name && date) {
+                // В будущем здесь будет запрос к бэкенду: fetch('/api/add', { method: 'POST', ... })
+                const newProd = {
+                    id: Date.now(),
+                    name: name,
+                    brand: brand,
+                    date: date,
+                    days: Math.floor(Math.random() * 100), // Временная заглушка
+                    bg: 'bg-teal-50',
+                    text: 'text-teal-500'
+                };
+                products.push(newProd);
+                renderProducts();
+                closeModal();
+            }
+        }
+
+        function startScan() {
+            alert("Здесь 3-й участник подключит камеру для сканирования чека!");
+        }
+
+        function deleteProduct(id) {
+            products = products.filter(p => p.id !== id);
+            renderProducts();
+        }
+
+        renderProducts();
+    </script>
 </body>
 </html>
