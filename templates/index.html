@@ -1,4 +1,3 @@
-<!-- Дарья, это твои файлы, здесь пока находиться сайт заглушка, простая версия, для того, чтобы обработать backend, ты можешь создать другой дизайн, где будет больше функций -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -8,32 +7,36 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Сроки годности</h1>
-        
-        <!-- Сюда скрипт будет добавлять карточки товаров -->
-        <div id="list" class="list"></div>
-        
-        <!-- Пустые слоты для визуального баланса -->
-        <div class="slots">
-            <div class="slot"></div>
-            <div class="slot"></div>
-        </div>
+<div class="container">
+    <h1>Сроки годности</h1>
+
+    <!-- Сюда скрипт будет добавлять карточки товаров -->
+    <div id="list" class="list"></div>
+
+    <!-- Пустые слоты для визуального баланса -->
+    <div class="slots">
+        <div class="slot"></div>
+        <div class="slot"></div>
     </div>
+</div>
 
-    <!-- Плавающая кнопка добавления -->
-    <button class="fab" onclick="openModal()">+</button>
+<!-- Плавающая кнопка добавления -->
+<button class="fab" onclick="openModal()">+</button>
 
-    <!-- Модальное окно сканирования -->
-    <div id="modal" class="modal">
-        <div class="modal-box">
-            <h2>Сканирование чека</h2>
-            <div class="cam-placeholder">📷 Область камеры</div>
-            <button class="btn btn-scan" onclick="mockScan()">📸 Сканировать (тест)</button>
-            <button class="btn btn-close" onclick="closeModal()">Закрыть</button>
+<!-- Модальное окно сканирования -->
+<div id="modal" class="modal">
+    <div class="modal-box">
+        <h2>Сканирование чека</h2>
+        <div class="cam-placeholder">
+            <video id="camera-video" autoplay playsinline></video>
         </div>
+        <button class="btn btn-scan" id="capture-btn">📸 Сфотографировать</button>
+        <button class="btn btn-switch" id="switch-btn">🔄</button>
+        <button class="btn btn-close" onclick="closeModal()">Закрыть</button>
     </div>
+</div>
 
-    <script src="/static/ui.js"></script>
+<script src="/static/script.js"></script>
+<script src="/static/ui.js"></script>
 </body>
 </html>
