@@ -117,7 +117,7 @@
   {"name": "Мармелад", "shelf_life_days": 180},
   {"name": "Жвачка", "shelf_life_days": 365},
   {"name": "Салфетки бумажные", "shelf_life_days": 1825},
-  {"name": "Туалетная бумага", "shelf_life_days": 1825}
+  {"name": "Туалетная бумага", "shelf_life_days": 1825},
   {"name": "Увлажняющий крем для лица", "shelf_life_days": 730},
   {"name": "Сыворотка с витамином C", "shelf_life_days": 365},
   {"name": "Тональный крем", "shelf_life_days": 548},
